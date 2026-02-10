@@ -19,7 +19,7 @@ cp .env.example .env
 
 Edit `.env` with your business details.
 
-## Run locally
+## Build and run locally
 ```bash
 npm start
 ```
@@ -27,7 +27,8 @@ npm start
 ## Run with PM2 (VPS)
 ```bash
 npm install -g pm2
-pm2 start ecosystem.config.js
+npm run build
+pm2 start ecosystem.config.json
 pm2 logs whatsapp-bot
 pm2 save
 pm2 startup

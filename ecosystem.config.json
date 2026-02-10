@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "whatsapp-bot",
+      "script": "dist/index.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

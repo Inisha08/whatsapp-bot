@@ -1,11 +1,7 @@
-"use strict";
-
-function sleep(ms) {
+export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function randomBetween(min, max) {
+export function randomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-module.exports = { sleep, randomBetween };

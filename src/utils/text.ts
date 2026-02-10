@@ -1,6 +1,4 @@
-"use strict";
-
-function normalize(text) {
+export function normalize(text: string): string {
   return String(text || "")
     .toLowerCase()
     .replace(/[^a-z0-9\s+]/g, " ")
@@ -8,23 +6,16 @@ function normalize(text) {
     .trim();
 }
 
-function pick(list) {
+export function pick<T>(list: T[]): T {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-function extractOrderId(text) {
+export function extractOrderId(text: string): string | null {
   const match = String(text || "").match(/[a-z0-9-]{5,}/i);
   return match ? match[0] : null;
 }
 
-function extractPhone(text) {
+export function extractPhone(text: string): string | null {
   const match = String(text || "").match(/(\+?\d[\d\s-]{7,}\d)/);
   return match ? match[1].replace(/\s+/g, "") : null;
 }
-
-module.exports = {
-  normalize,
-  pick,
-  extractOrderId,
-  extractPhone,
-};

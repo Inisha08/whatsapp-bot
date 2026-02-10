@@ -7,6 +7,8 @@ yarn-error.log*
 .pnpm-debug.log*
 logs
 *.log
+dist
+*.tsbuildinfo
 
 # whatsapp-web.js auth/session data
 .wwebjs_auth

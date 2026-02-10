@@ -1,9 +1,14 @@
-"use strict";
+import { config } from "../config";
+import { pick } from "../utils/text";
 
-const { config } = require("../config");
-const { pick } = require("../utils/text");
+export type Intent = {
+  name: string;
+  patterns: RegExp[];
+  reply: () => string;
+  setAwaiting?: string;
+};
 
-const INTENTS = [
+const INTENTS: Intent[] = [
   {
     name: "ping",
     patterns: [/\bping\b/i],
@@ -115,7 +120,7 @@ const INTENTS = [
   },
 ];
 
-function findIntent(text) {
+export function findIntent(text: string): Intent | null {
   for (const intent of INTENTS) {
     if (intent.patterns.some((pattern) => pattern.test(text))) {
       return intent;
@@ -123,5 +128,3 @@ function findIntent(text) {
   }
   return null;
 }
-
-module.exports = { findIntent };

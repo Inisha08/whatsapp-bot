@@ -1,13 +1,12 @@
-"use strict";
+import type { Message } from "whatsapp-web.js";
+import { config } from "../config";
+import { findIntent } from "./intents";
+import { replyWithTyping } from "./reply";
+import { addMessage, getHistory, getSession } from "./memory";
+import { normalize, pick, extractOrderId, extractPhone } from "../utils/text";
+import { generateAiReply } from "./ai";
 
-const { config } = require("../config");
-const { findIntent } = require("./intents");
-const { replyWithTyping } = require("./reply");
-const { addMessage, getSession, getHistory } = require("./memory");
-const { normalize, pick, extractOrderId, extractPhone } = require("../utils/text");
-const { generateAiReply } = require("./ai");
-
-async function handleIncomingMessage(message) {
+export async function handleIncomingMessage(message: Message): Promise<void> {
   const text = message.body || "";
   const normalized = normalize(text);
   const session = getSession(message.from);
@@ -90,9 +89,10 @@ async function handleIncomingMessage(message) {
   );
 }
 
-async function replyAndStore(message, replyText) {
+async function replyAndStore(
+  message: Message,
+  replyText: string
+): Promise<void> {
   await replyWithTyping(message, replyText);
   addMessage(message.from, "assistant", replyText);
 }
-
-module.exports = { handleIncomingMessage };

@@ -1,9 +1,8 @@
-"use strict";
+import type { Message } from "whatsapp-web.js";
+import { isBotEnabled, setBotEnabled } from "./state";
+import { normalize } from "../utils/text";
 
-const { isBotEnabled, setBotEnabled } = require("./state");
-const { normalize } = require("../utils/text");
-
-async function handleOwnerCommand(message) {
+export async function handleOwnerCommand(message: Message): Promise<boolean> {
   const text = normalize(message.body);
   if (text === "!bot on") {
     setBotEnabled(true);
@@ -21,5 +20,3 @@ async function handleOwnerCommand(message) {
   }
   return false;
 }
-
-module.exports = { handleOwnerCommand };
